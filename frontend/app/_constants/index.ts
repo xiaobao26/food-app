@@ -13,7 +13,7 @@ export const BACKEND_URL = "http://localhost:8080";
  * API endpoint for test purposes.
  * @type {string}
  */
-export const API_GET_TEST: string = "/apis/test";
+export const API_TEST_GET: string = "/apis/test";
 
 // /**
 //  * API endpoint for user authentication signup.

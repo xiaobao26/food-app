@@ -1,4 +1,4 @@
-import apiTest from "@/apis/api-test";
+import apiTest from "@/_apis/api-test";
 
 /**
  * Page component that fetches data from an API using the apiTest function.

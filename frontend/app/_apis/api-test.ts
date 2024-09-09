@@ -1,4 +1,4 @@
-import { API_GET_TEST, BACKEND_URL } from "@/_constants";
+import { API_TEST_GET, BACKEND_URL } from "@/_constants";
 
 /**
  * Test to see if we can access the backend API.
@@ -9,7 +9,7 @@ import { API_GET_TEST, BACKEND_URL } from "@/_constants";
 export default async function apiTest(): Promise<string> {
   try {
     // Make a request to the backend API
-    const res = await fetch(BACKEND_URL + API_GET_TEST);
+    const res = await fetch(BACKEND_URL + API_TEST_GET);
 
     // Check if the response status is ok (HTTP status 200-299)
     if (!res.ok) {
