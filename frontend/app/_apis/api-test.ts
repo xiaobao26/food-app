@@ -1,4 +1,4 @@
-import { API_GET_TEST, BACKEND_URL } from "@/constants";
+import { API_GET_TEST, BACKEND_URL } from "@/_constants";
 
 /**
  * Test to see if we can access the backend API.
