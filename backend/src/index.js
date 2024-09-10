@@ -10,6 +10,7 @@ const logger = createLogger(__filename);
 const rateLimit = require("./utils/rateLimit");
 const formatResponseMiddleware = require("./middlewares/formatResponse.middlewares");
 const unknownErrorMiddlewares = require('./middlewares/error/unknownError.middlewares');
+const connectToDB = require('./utils/db');
 
 
 app.use(helmet());
@@ -24,6 +25,9 @@ app.get("/", (req, res) => {
     res.formatResponse('all good!')
 })
 app.use(unknownErrorMiddlewares);
-app.listen(config.PORT, ()=> {
-    logger.info(`Server running at ${config.PORT} port`);
+
+connectToDB().then(() => {
+    app.listen(config.PORT, ()=> {
+        logger.info(`Server running at ${config.PORT} port`);
+    })
 })
