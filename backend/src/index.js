@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
+const swaggerUI = require('swagger-ui-express');
 
 const morgan = require('./utils/morgan');
 const createLogger = require("./utils/logger");
@@ -12,6 +13,7 @@ const formatResponseMiddleware = require("./middlewares/formatResponse.middlewar
 const unknownErrorMiddlewares = require('./middlewares/error/unknownError.middlewares');
 const connectToDB = require('./utils/db');
 const v1Router = require('./routes');
+const swaggerJSDoc = require('./utils/swagger');
 
 
 app.use(helmet());
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(morgan);
 app.use(rateLimit);
 app.use(formatResponseMiddleware);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJSDoc));
 
 app.use('/v1', v1Router);
 app.use(unknownErrorMiddlewares);
