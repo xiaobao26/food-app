@@ -14,6 +14,7 @@ const unknownErrorMiddlewares = require('./middlewares/error/unknownError.middle
 const connectToDB = require('./utils/db');
 const v1Router = require('./routes');
 const swaggerJSDoc = require('./utils/swagger');
+const pathNotFoundMiddleware = require('./middlewares/pathNotFound.middleware');
 
 
 app.use(helmet());
@@ -25,6 +26,9 @@ app.use(formatResponseMiddleware);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJSDoc));
 
 app.use('/v1', v1Router);
+
+// pathNotFoundMiddleware need be at front of any error
+app.use(pathNotFoundMiddleware);
 app.use(unknownErrorMiddlewares);
 
 connectToDB().then(() => {
