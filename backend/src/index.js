@@ -11,6 +11,7 @@ const rateLimit = require("./utils/rateLimit");
 const formatResponseMiddleware = require("./middlewares/formatResponse.middlewares");
 const unknownErrorMiddlewares = require('./middlewares/error/unknownError.middlewares');
 const connectToDB = require('./utils/db');
+const v1Router = require('./routes');
 
 
 app.use(helmet());
@@ -20,10 +21,7 @@ app.use(morgan);
 app.use(rateLimit);
 app.use(formatResponseMiddleware);
 
-
-app.get("/", (req, res) => {
-    res.formatResponse('all good!')
-})
+app.use('/v1', v1Router);
 app.use(unknownErrorMiddlewares);
 
 connectToDB().then(() => {
