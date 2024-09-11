@@ -72,10 +72,20 @@ const UserModel = require('../models/user.model');
  *         description: Internal server error
  */
 const getAllUsers = async (req, res, next) => {
-    const users = await UserModel.find().exec();
+    // pagination
+    const pageSize = parseInt(req.query.pageSize) || 2; // 每页的记录数
+    // last require recorded id
+    const cursor = req.query.cursor;
+
+    let query = {};
+    if (cursor) {
+        query._id = { $gt: cursor };
+    }
+    const users = await UserModel.find(query).limit(pageSize).exec();
     
+    const nextCursor = users.length === pageSize ? users[users.length - 1]._id : null;
     // status code: 200 -> ok
-    res.formatResponse(users);
+    res.formatResponse(users, 200, { nextCursor });
 };
 
 
