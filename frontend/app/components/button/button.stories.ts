@@ -11,28 +11,21 @@ const meta: Meta<typeof Button> = {
 
 export default meta;
 
-const defaultProps = {
-  children: "Button",
-  // spinnerPlacement: "start",
-  ...button.defaultVariants,
-};
-
 type Story = StoryObj<typeof meta>;
 
-export const ReviewOrder: Story = {
+export const ButtonSmall: Story = {
   args: {
-    ...defaultProps,
-    children: "Review Order",
+    children: "Small",
+    size: "sm",
     radius: "full",
-    className: "bg-[#e4002b] text-white px-10",
   },
 };
 
-export const OrderNow: Story = {
+export const ButtonMedium: Story = {
   args: {
-    ...defaultProps,
-    children: "Order Now",
+    children: "Mediumd",
+    size: "md",
     radius: "full",
-    className: "bg-[#e4002b] text-white px-10 w-44 h-10",
+    className: "px-10 w-44 h-10",
   },
 };

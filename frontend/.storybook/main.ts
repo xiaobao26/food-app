@@ -16,5 +16,7 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  // Question: Cant serve static files in NextJs + Storybook https://stackoverflow.com/questions/64016896/cant-serve-static-files-in-nextjs-storybook
+  staticDirs: ['../public'],
 };
 export default config;

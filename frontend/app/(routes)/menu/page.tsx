@@ -1,3 +1,3 @@
 export default async function Page() {
-    return <h1>Home Page</h1>;
+    return <h1>Menu Page</h1>;
 }
