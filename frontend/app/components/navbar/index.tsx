@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   Divider,
   Link,
   Navbar,
@@ -94,7 +93,7 @@ export function NavbarMobile() {
   );
 }
 
-export function NavbarNonMobile() {
+export function NavbarNoMobile() {
   const pathname = usePathname();
   const basePath = splitUrlPathname(pathname)[0];
 
