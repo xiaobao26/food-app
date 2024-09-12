@@ -1,3 +1,9 @@
+import CarouselHero from "@/components/carousel/CarouselHero";
+
 export default async function Page() {
-    return <h1>Hello World!</h1>;
+  return (
+    <>
+      <CarouselHero />
+    </>
+  );
 }
