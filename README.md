@@ -6,4 +6,8 @@ react  node.js express
 > https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/
 
 ### user schema
-> ![alt text](user_schema.png)
+> ![alt text](userSchema.png)
+
+
+### user path
+> http://localhost:8080/api-docs/
