@@ -1,6 +1,4 @@
 export function splitUrlPathname(path: string) {
-  console.log(path);
-
   if (!path) {
     return [];
   }

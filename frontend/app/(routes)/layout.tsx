@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <NavbarNoMobile />
-          {children}
+          <main>{children}</main>
           <NavbarMobile />
         </Provider>
       </body>

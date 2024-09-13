@@ -1,4 +1,4 @@
-import CarouselHero from "@/components/carousel/CarouselHero";
+import CarouselHero from "@/components/carousel/carousel-hero";
 
 export default async function Page() {
   return (

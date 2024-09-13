@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import ClassNames from "embla-carousel-class-names";
 import "./carouselhero.css";
 import Image from "next/image";
-import { DotButton, useDotButton } from "./CarouselHeroDotButton";
+import { DotButton, useDotButton } from "./carousel-hero-dot-button";
 
 const SLIDE_COUNT = 4;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
@@ -30,6 +30,8 @@ export default function CarouselHero() {
                 alt={`hero_${index + 1}`}
                 fill
                 style={{ objectFit: "cover", objectPosition: "0% 10%" }}
+                // Why add this priority attribute, see https://nextjs.org/docs/pages/api-reference/components/image#priority
+                priority={true}
               />
             </div>
           ))}
