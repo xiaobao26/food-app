@@ -93,7 +93,7 @@ export function NavbarMobile() {
   );
 }
 
-export function NavbarNoMobile() {
+export function NavbarDesktop() {
   const pathname = usePathname();
   const basePath = splitUrlPathname(pathname)[0];
 
