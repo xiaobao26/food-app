@@ -7,6 +7,7 @@ import { DotButton, useDotButton } from "./carousel-hero-dot-button";
 import ButtonCustom from "../button/button-custom";
 import { Link } from "@nextui-org/react";
 import styled from "styled-components";
+import { national2Condensed, national2Regular } from "../font";
 
 export type TypeSlideHero = {
   title: string;
@@ -65,10 +66,14 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
             >
               <div className="max-w-screen-lg w-full flex flex-col gap-3 justify-center pl-[10%] lg:pl-[102.4px]">
                 <div>
-                  <div className="font-sans text-sm text-white uppercase font-medium">
+                  <div
+                    className={`${national2Condensed.className} text-sm tracking-widest text-white uppercase font-medium`}
+                  >
                     {slide.smallTitle}
                   </div>
-                  <div className="font-sans text-2xl text-white uppercase font-bold">
+                  <div
+                    className={`${national2Condensed.className} text-2xl text-white uppercase font-bold`}
+                  >
                     {slide.title}
                   </div>
                 </div>
@@ -78,11 +83,13 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
                     radius="full"
                     as={Link}
                     href={slide.orderLink}
-                    className="w-32 h-8 text-xs bg-[#E4002B] text-white hover:border-2 hover:border-[#E4002B] hover:bg-white hover:text-[#E4002B]"
+                    className={`${national2Regular.className} w-32 h-8 text-xs bg-[#E4002B] text-white hover:border-2 hover:border-[#E4002B] hover:bg-white hover:text-[#E4002B]`}
                   >
                     Order Now
                   </ButtonCustom>
-                  <div className="font-serif text-xs text-white ml-2">
+                  <div
+                    className={`${national2Regular.className} font-serif text-xs text-white ml-2`}
+                  >
                     {slide.note}
                   </div>
                 </div>
