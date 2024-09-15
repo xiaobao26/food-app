@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { DotButton, useDotButton } from "./carousel-hero-dot-button";
 import ButtonCustom from "../button/button-custom";
 import { Link } from "@nextui-org/react";
+import styled from "styled-components";
 
 export type TypeSlideHero = {
   title: string;
@@ -13,18 +14,40 @@ export type TypeSlideHero = {
   imgSrcMobile: string;
   orderLink: string;
   note: string;
-  imgSrcDesktop?: string;
+  imgSrcDesktop: string;
 };
 
 type CarouselHeroProps = {
   slides: TypeSlideHero[];
 };
 
+const CarouselHeroSlide = styled.div<{ slide: TypeSlideHero }>`
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      190.77deg,
+      rgba(32, 33, 36, 0) 21.45%,
+      rgba(32, 33, 36, 0.6) 98.01%
+    ),
+    url(${(props) => props.slide.imgSrcMobile});
+  background-size: cover;
+
+  @media (min-width: 640px) {
+    background-image: url(${(props) => props.slide.imgSrcDesktop});
+  }
+`;
+
 export default function CarouselHero({ slides }: CarouselHeroProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     ClassNames(),
-    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
+    Autoplay({
+      delay: 5000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+      playOnInit: false,
+    }),
   ]);
+
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
     emblaApi,
     () => {}
@@ -33,24 +56,14 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
   return (
     <div className="embla w-full relative">
       <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-        <div className="embla__containe flex">
+        <div className="embla__container flex">
           {slides.map((slide) => (
-            <div
+            <CarouselHeroSlide
               key={slide.title}
-              className="embla__slide embla__class-names flex-[0_0_100%] transition-opacity duration-200 ease-in-out [&:not(.is-snapped)]:opacity-50 relative"
+              className="embla__slide embla__class-names flex-[0_0_100%] w-full aspect-[4/3] sm:aspect-[16/7] transition-opacity duration-200 ease-in-out [&:not(.is-snapped)]:opacity-50 flex justify-center"
+              slide={slide}
             >
-              <picture>
-                <source
-                  media="(min-width: 640px)"
-                  srcSet={slide.imgSrcDesktop}
-                />
-                <img
-                  src={slide.imgSrcMobile}
-                  alt={slide.title}
-                  className="w-full aspect-[4/3] object-cover object-[0_10%] sm:aspect-auto brightness-75"
-                />
-              </picture>
-              <div className="absolute bottom-[20%] left-[10%] flex flex-col gap-3">
+              <div className="max-w-screen-lg w-full flex flex-col gap-3 justify-center pl-[10%] lg:pl-[102.4px]">
                 <div>
                   <div className="font-sans text-sm text-white uppercase font-medium">
                     {slide.smallTitle}
@@ -74,7 +87,7 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </CarouselHeroSlide>
           ))}
         </div>
       </div>
