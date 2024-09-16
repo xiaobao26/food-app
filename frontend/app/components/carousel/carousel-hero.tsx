@@ -67,12 +67,12 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
               <div className="max-w-screen-lg w-full flex flex-col gap-3 justify-center pl-[10%] lg:pl-[102.4px]">
                 <div>
                   <div
-                    className={`${national2Condensed.className} text-sm tracking-widest text-white uppercase font-medium`}
+                    className={`${national2Condensed.className} text-sm tracking-widest text-white uppercase`}
                   >
                     {slide.smallTitle}
                   </div>
                   <div
-                    className={`${national2Condensed.className} text-2xl text-white uppercase font-bold`}
+                    className={`${national2Condensed.className} text-xl text-white uppercase`}
                   >
                     {slide.title}
                   </div>
