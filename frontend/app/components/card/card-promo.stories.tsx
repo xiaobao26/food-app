@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 const promo: CardPromoProps = {
   title: "$6.95 double slider & chips",
-  imgSrc: "/PROMO_DOUBLE_SLIDER_CHIPS.png",
+  imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
   detail: "Double the Sliders, double the fun! Untile 4pm.",
   detailLink: "#",
   redeemLink: "#",

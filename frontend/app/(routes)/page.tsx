@@ -1,6 +1,6 @@
-import CarouselHero from "@/components/carousel/carousel-hero";
-import H2 from "@/components/heading/h2";
-import { fakeSlidesHero } from "@/data/data-fake";
+import CarouselHero from "@/app/components/carousel/carousel-hero";
+import H2 from "@/app/components/heading/h2";
+import { fakeSlidesHero } from "@/app/data/data-fake";
 
 export default async function Page() {
   return (

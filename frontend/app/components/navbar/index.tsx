@@ -14,23 +14,22 @@ import {
   LINK_HOME,
   LINK_MENU,
   LINK_PROMOS_REWARDS,
-} from "@/lib/constants";
+} from "@/app/lib/constants";
 
 import { usePathname } from "next/navigation";
-import { getBasePath } from "@/lib/utils";
-import { fontN2M } from "../font";
+import { getBaseUrlPath } from "@/app/lib/utils";
 
-import IconCartDesktop from "../../../public/icons/icon-cart-desktop.svg";
-import IconCartDesktopUrl from "../../../public/icons/icon-cart-desktop.svg?url";
-import IconKfcLogo from "../../../public/icons/icon-kfc-logo.svg";
-import IconHomeOutlined from "../../../public/icons/icon-home-outlined.svg";
-import IconHomeFilled from "../../../public/icons/icon-home-filled.svg";
-import IconPoultryLegOutlined from "../../../public/icons/icon-poultry-leg-outlined.svg";
-import IconPoultryLegFilled from "../../../public/icons/icon-poultry-leg-filled.svg";
-import IconPriceTagOutlined from "../../../public/icons/icon-price-tag-outlined.svg";
-import IconPriceTagFilled from "../../../public/icons/icon-price-tag-filled.svg";
-import IconMenu from "../../../public/icons/icon-menu.svg";
-import IconUser from "../../../public/icons/icon-user.svg";
+import IconCartDesktop from "@/public/icons/icon-cart-desktop.svg";
+import IconCartDesktopUrl from "@/public/icons/icon-cart-desktop.svg?url";
+import IconKfcLogo from "@/public/icons/icon-kfc-logo.svg";
+import IconHomeOutlined from "@/public/icons/icon-home-outlined.svg";
+import IconHomeFilled from "@/public/icons/icon-home-filled.svg";
+import IconPoultryLegOutlined from "@/public/icons/icon-poultry-leg-outlined.svg";
+import IconPoultryLegFilled from "@/public/icons/icon-poultry-leg-filled.svg";
+import IconPriceTagOutlined from "@/public/icons/icon-price-tag-outlined.svg";
+import IconPriceTagFilled from "@/public/icons/icon-price-tag-filled.svg";
+import IconMenu from "@/public/icons/icon-menu.svg";
+import IconUser from "@/public/icons/icon-user.svg";
 
 const NAVIGATION_MOBILE = [
   {
@@ -78,15 +77,15 @@ const NAVIGATION_DESKTOP = [
 
 export function NavbarMobile() {
   const pathname = usePathname();
-  const basePath = getBasePath(pathname);
+  const basePath = getBaseUrlPath(pathname);
 
   const navHeight = "h-14";
   const iconSize = "w-4 h-4";
 
   return (
-    <div className={`${fontN2M.className} lg:hidden text-[10px] leading-4`}>
+    <div className={`w-full ${navHeight} lg:hidden  static bottom-0`}>
       <nav
-        className={`w-full ${navHeight} bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around`}
+        className={`font-n2m text-[10px] leading-4 w-full ${navHeight} bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around`}
       >
         {NAVIGATION_MOBILE.map((item) => (
           <div key={item.title}>
@@ -106,18 +105,17 @@ export function NavbarMobile() {
           </div>
         ))}
       </nav>
-      <div className={`w-full ${navHeight} static bottom-0`}></div>
     </div>
   );
 }
 
 export function NavbarDesktop() {
   const pathname = usePathname();
-  const basePath = getBasePath(pathname);
+  const basePath = getBaseUrlPath(pathname);
 
   return (
     <Navbar
-      className={`${fontN2M.className} hidden lg:flex lg:h-24`}
+      className="font-n2m hidden lg:flex lg:h-24"
       isBordered
       classNames={{
         item: [

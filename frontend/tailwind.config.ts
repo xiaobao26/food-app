@@ -15,6 +15,11 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        n2c: ["var(--font-n2c)"],
+        n2m: ["var(--font-n2m)"],
+        n2r: ["var(--font-n2r)"],
+      },
     },
   },
   darkMode: "class",

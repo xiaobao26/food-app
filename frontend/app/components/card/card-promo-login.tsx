@@ -3,7 +3,7 @@ import ButtonCustom from "../button/button-custom";
 
 export default function CardPromoLogin() {
   return (
-    <Card className="w-60 h-[480px] bg-[#f9f6f5] flex-col items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('/CARD_PROMO_LOGIN.png')]">
+    <Card className="w-60 h-[480px] bg-[#f9f6f5] flex-col items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('/images/PROMO_LOGIN.png')]">
       <CardHeader className="flex-col gap-3">
         <p className="font-sans text-white text-2xl text-center font-bold uppercase">
           Sign in to see

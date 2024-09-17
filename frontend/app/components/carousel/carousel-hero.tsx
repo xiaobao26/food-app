@@ -7,7 +7,6 @@ import { DotButton, useDotButton } from "./carousel-hero-dot-button";
 import ButtonCustom from "../button/button-custom";
 import { Link } from "@nextui-org/react";
 import styled from "styled-components";
-import { fontN2C, FontN2R } from "../font";
 
 export type TypeSlideHero = {
   title: string;
@@ -67,13 +66,11 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
               <div className="max-w-screen-lg w-full flex flex-col gap-3 justify-center pl-[10%] lg:pl-[102.4px]">
                 <div>
                   <div
-                    className={`${fontN2C.className} text-sm tracking-widest text-white uppercase`}
+                    className={`font-n2c text-sm tracking-widest text-white uppercase`}
                   >
                     {slide.smallTitle}
                   </div>
-                  <div
-                    className={`${fontN2C.className} text-xl text-white uppercase`}
-                  >
+                  <div className={`font-n2c text-xl text-white uppercase`}>
                     {slide.title}
                   </div>
                 </div>
@@ -83,13 +80,11 @@ export default function CarouselHero({ slides }: CarouselHeroProps) {
                     radius="full"
                     as={Link}
                     href={slide.orderLink}
-                    className={`${FontN2R.className} w-32 h-8 text-xs bg-[#E4002B] text-white hover:border-2 hover:border-[#E4002B] hover:bg-white hover:text-[#E4002B]`}
+                    className={`font-n2r w-32 h-8 text-xs bg-[#E4002B] text-white hover:border-2 hover:border-[#E4002B] hover:bg-white hover:text-[#E4002B]`}
                   >
                     Order Now
                   </ButtonCustom>
-                  <div
-                    className={`${FontN2R.className} font-serif text-xs text-white ml-2`}
-                  >
+                  <div className={`font-n2r text-xs text-white ml-2`}>
                     {slide.note}
                   </div>
                 </div>

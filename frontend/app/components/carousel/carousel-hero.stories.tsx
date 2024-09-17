@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CarouselHero from "./carousel-hero";
-import { fakeSlidesHero } from "@/data/data-fake";
+import { fakeSlidesHero } from "@/app/data/data-fake";
 
 const meta: Meta<typeof CarouselHero> = {
   title: "Components/Carousel/Hero",

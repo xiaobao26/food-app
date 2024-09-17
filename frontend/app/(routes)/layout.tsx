@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/components/global.css";
 import { Provider } from "./provider";
-import { NavbarMobile, NavbarDesktop } from "@/components/navbar";
-
-const inter = Inter({ subsets: ["latin"] });
+import { NavbarMobile, NavbarDesktop } from "@/app/components/navbar";
+import { fontN2C, fontN2M, FontN2R } from "../components/font";
 
 export const metadata: Metadata = {
   title: "Food App",
@@ -17,8 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html
+      lang="en"
+      className={`${fontN2C.variable} ${fontN2M.variable} ${FontN2R.variable}`}
+    >
+      <body>
         <Provider>
           <NavbarDesktop />
           <main>{children}</main>

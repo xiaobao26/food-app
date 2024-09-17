@@ -1,4 +1,4 @@
-export function getBasePath(path: string) {
+export function getBaseUrlPath(path: string) {
   if (!path) {
     return null;
   }
