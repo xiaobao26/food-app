@@ -1,16 +1,16 @@
 import localFont from "next/font/local";
 
-export const national2Condensed = localFont({
+export const fontN2C = localFont({
   src: "../../../public/fonts/National2_Condensed_Bold.otf",
   display: "swap",
 });
 
-export const national2Regular = localFont({
+export const FontN2R = localFont({
   src: "../../../public/fonts/National2_Regular.otf",
   display: "swap",
 });
 
-export const national2Medium = localFont({
+export const fontN2M = localFont({
   src: "../../../public/fonts/National2_Medium.otf",
   display: "swap",
 });

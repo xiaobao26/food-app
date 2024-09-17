@@ -4,22 +4,10 @@ import {
   Divider,
   Link,
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
 
-import {
-  IconPoultryLegFilled,
-  IconPoultryLegOutlined,
-} from "../icon/icon-poultry-leg";
-import { IconPriceTagFilled, IconPriceTagOutlined } from "../icon/icon-promo";
-import { IconHomeFilled, IconHomeOutlined } from "../icon/icon-home";
-import {
-  IconKfcChickenBoxfilled,
-  IconKfcChickenBoxOutlined,
-} from "../icon/icon-kfc-chicken-box";
-import IconMenu from "../icon/icon-menu";
 import {
   LINK_ACCOUNT,
   LINK_CART,
@@ -27,10 +15,22 @@ import {
   LINK_MENU,
   LINK_PROMOS_REWARDS,
 } from "@/lib/constants";
+
 import { usePathname } from "next/navigation";
-import { splitUrlPathname } from "@/lib/utils";
-import IconKfc from "../icon/icon-kfc";
-import IconUser from "../icon/icon-user";
+import { getBasePath } from "@/lib/utils";
+import { fontN2M } from "../font";
+
+import IconCartDesktop from "../../../public/icons/icon-cart-desktop.svg";
+import IconCartDesktopUrl from "../../../public/icons/icon-cart-desktop.svg?url";
+import IconKfcLogo from "../../../public/icons/icon-kfc-logo.svg";
+import IconHomeOutlined from "../../../public/icons/icon-home-outlined.svg";
+import IconHomeFilled from "../../../public/icons/icon-home-filled.svg";
+import IconPoultryLegOutlined from "../../../public/icons/icon-poultry-leg-outlined.svg";
+import IconPoultryLegFilled from "../../../public/icons/icon-poultry-leg-filled.svg";
+import IconPriceTagOutlined from "../../../public/icons/icon-price-tag-outlined.svg";
+import IconPriceTagFilled from "../../../public/icons/icon-price-tag-filled.svg";
+import IconMenu from "../../../public/icons/icon-menu.svg";
+import IconUser from "../../../public/icons/icon-user.svg";
 
 const NAVIGATION_MOBILE = [
   {
@@ -48,8 +48,8 @@ const NAVIGATION_MOBILE = [
   {
     title: "Cart",
     link: LINK_CART,
-    iconOutlined: IconKfcChickenBoxOutlined,
-    iconFilled: IconKfcChickenBoxfilled,
+    iconOutlined: IconCartDesktop,
+    iconFilled: IconCartDesktop,
   },
   {
     title: "Promos",
@@ -65,41 +65,59 @@ const NAVIGATION_MOBILE = [
   },
 ];
 
+const NAVIGATION_DESKTOP = [
+  {
+    title: "Menu",
+    link: LINK_MENU,
+  },
+  {
+    title: "Promos & Rewards",
+    link: LINK_PROMOS_REWARDS,
+  },
+];
+
 export function NavbarMobile() {
   const pathname = usePathname();
-  const basePath = splitUrlPathname(pathname)[0];
+  const basePath = getBasePath(pathname);
+
+  const navHeight = "h-14";
+  const iconSize = "w-4 h-4";
 
   return (
-    <div className="sm:hidden">
-      <nav className="w-full h-16 bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around ">
+    <div className={`${fontN2M.className} lg:hidden text-[10px] leading-4`}>
+      <nav
+        className={`w-full ${navHeight} bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around`}
+      >
         {NAVIGATION_MOBILE.map((item) => (
           <div key={item.title}>
-            {item.link === basePath ? (
-              <Link href={item.link} className="flex-col">
-                <item.iconFilled fill="#e4002c" />
-                <span className="text-[#e4002c]">{item.title}</span>
-              </Link>
-            ) : (
-              <Link href={item.link} className="flex-col">
-                <item.iconOutlined />
-                <span className="text-black">{item.title}</span>
-              </Link>
-            )}
+            <a href={item.link} className="flex flex-col items-center">
+              {item.link === basePath ? (
+                <>
+                  <item.iconFilled className={`fill-[#e4002c] ${iconSize}`} />
+                  <span className="text-[#e4002c]">{item.title}</span>
+                </>
+              ) : (
+                <>
+                  <item.iconOutlined className={iconSize} />
+                  <span className="text-black">{item.title}</span>
+                </>
+              )}
+            </a>
           </div>
         ))}
       </nav>
-      <div className="w-full h-16 static bottom-0"></div>
+      <div className={`w-full ${navHeight} static bottom-0`}></div>
     </div>
   );
 }
 
 export function NavbarDesktop() {
   const pathname = usePathname();
-  const basePath = splitUrlPathname(pathname)[0];
+  const basePath = getBasePath(pathname);
 
   return (
     <Navbar
-      className="hidden sm:flex"
+      className={`${fontN2M.className} hidden lg:flex lg:h-24`}
       isBordered
       classNames={{
         item: [
@@ -118,40 +136,41 @@ export function NavbarDesktop() {
         ],
       }}
     >
-      <NavbarBrand>
-        <Link href={LINK_HOME}>
-          <IconKfc width={48} height={48} fill="#e4002c" />
-        </Link>
-      </NavbarBrand>
-      <NavbarContent className="flex gap-6" justify="center">
-        <NavbarItem isActive={LINK_MENU === basePath}>
-          <Link
-            href={LINK_MENU}
-            className={`${LINK_MENU === basePath ? "text-[#e4002c]" : "text-black"}`}
+      <NavbarContent className="flex gap-10">
+        <a href={LINK_HOME}>
+          <IconKfcLogo />
+        </a>
+        {NAVIGATION_DESKTOP.map((item) => (
+          <NavbarItem
+            key={item.title}
+            isActive={item.link === basePath}
+            className="text-sm"
           >
-            Menu
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive={LINK_PROMOS_REWARDS === basePath}>
-          <Link
-            href={LINK_PROMOS_REWARDS}
-            className={`${LINK_PROMOS_REWARDS === basePath ? "text-[#e4002c]" : "text-black"}`}
-          >
-            Promos & Rewards
-          </Link>
-        </NavbarItem>
+            <a
+              href={item.link}
+              className={`${
+                item.link === basePath ? "text-[#e4002c]" : "text-black"
+              }`}
+            >
+              {item.title}
+            </a>
+          </NavbarItem>
+        ))}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Link href="#" className="text-black gap-2">
-            <IconUser width={24} height={24} />
+          <a href="#" className="flex gap-3 items-center text-sm">
+            <IconUser className="w-5 h-5" />
             <span>Sign In</span>
-          </Link>
+          </a>
         </NavbarItem>
-        <Divider orientation="vertical" className="h-10" />
+        <Divider orientation="vertical" className="h-6" />
         <NavbarItem>
           <Link href={LINK_CART} className="text-black gap-2">
-            <IconKfcChickenBoxfilled width={40} height={40} fill="#e4002c" />
+            <div
+              className="w-12 h-12"
+              style={{ backgroundImage: `url(${IconCartDesktopUrl.src})` }}
+            ></div>
           </Link>
         </NavbarItem>
       </NavbarContent>

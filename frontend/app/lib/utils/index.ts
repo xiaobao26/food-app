@@ -1,16 +1,16 @@
-export function splitUrlPathname(path: string) {
+export function getBasePath(path: string) {
   if (!path) {
-    return [];
+    return null;
   }
 
   if (path === "/") {
-    return ["/"];
+    return path;
   }
 
   return path
     .split("/")
     .filter(Boolean)
-    .map((segment) => "/" + segment);
+    .map((segment) => "/" + segment)[0];
 }
 
 // Test cases
