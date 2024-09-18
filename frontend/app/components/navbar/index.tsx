@@ -83,7 +83,7 @@ export function NavbarMobile() {
   const iconSize = "w-4 h-4";
 
   return (
-    <div className={`w-full ${navHeight} lg:hidden  static bottom-0`}>
+    <div className={`w-full ${navHeight} lg:hidden static bottom-0`}>
       <nav
         className={`font-n2m text-[10px] leading-4 w-full ${navHeight} bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around`}
       >

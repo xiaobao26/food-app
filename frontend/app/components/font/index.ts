@@ -6,7 +6,7 @@ export const fontN2C = localFont({
   variable: "--font-n2c",
 });
 
-export const FontN2R = localFont({
+export const fontN2R = localFont({
   src: "../../../public/fonts/National2_Regular.otf",
   display: "swap",
   variable: "--font-n2r",

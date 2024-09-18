@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NavbarMobile } from ".";
 
 const meta: Meta<typeof NavbarMobile> = {
-  title: "Components/Navbar",
   component: NavbarMobile,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ["autodocs"],
+  parameters: {
+    layout: "fullscreen",
+  },
 };
 
 export default meta;

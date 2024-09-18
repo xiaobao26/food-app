@@ -1,25 +1,10 @@
-import React from "react";
+import * as React from "react";
 import type { Preview } from "@storybook/react";
 import "../app/components/global.css";
-import localFont from "next/font/local";
-
-export const fontN2C = localFont({
-  src: "../fonts/National2_Condensed_Bold.otf",
-  display: "swap",
-  variable: "--font-n2c",
-});
-
-export const FontN2R = localFont({
-  src: "../fonts/National2_Regular.otf",
-  display: "swap",
-  variable: "--font-n2r",
-});
-
-export const fontN2M = localFont({
-  src: "../fonts/National2_Medium.otf",
-  display: "swap",
-  variable: "--font-n2m",
-});
+import { DocsContainer } from "@storybook/blocks";
+import { fontN2C, fontN2R, fontN2M } from "../app/components/font";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import BREAKPOINT_VIEWPORT from "./breakpoint-viewport";
 
 const preview: Preview = {
   parameters: {
@@ -29,11 +14,28 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      container: (props: any) => (
+        <DocsContainer {...props}>
+          <div
+            className={`${fontN2C.variable} ${fontN2M.variable} ${fontN2R.variable}`}
+          >
+            {props.children}
+          </div>
+        </DocsContainer>
+      ),
+    },
+    viewport: {
+      viewports: {
+        ...BREAKPOINT_VIEWPORT,
+        ...INITIAL_VIEWPORTS,
+      },
+    },
   },
   decorators: [
     (Story) => (
       <div
-        className={`${fontN2C.variable} ${fontN2M.variable} ${FontN2R.variable}`}
+        className={`${fontN2C.variable} ${fontN2M.variable} ${fontN2R.variable}`}
       >
         <Story />
       </div>

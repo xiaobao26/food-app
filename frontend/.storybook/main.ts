@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/nextjs";
+import path from "path";
 
 const config: StorybookConfig = {
   stories: [
@@ -18,8 +19,14 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
-  // Question: Cant serve static files in NextJs + Storybook https://stackoverflow.com/questions/64016896/cant-serve-static-files-in-nextjs-storybook
-  staticDirs: ["../public"],
+  // https://storybook.js.org/docs/get-started/frameworks/nextjs?renderer=react#nextjs-font-optimization
+  staticDirs: [
+    "../public",
+    {
+      from: "../public/fonts",
+      to: "public/fonts",
+    },
+  ],
 
   // svgr config for typescript + storybook + next.js + webpack https://github.com/storybookjs/storybook/issues/18557#issuecomment-2179530837
   webpackFinal: async (config) => {

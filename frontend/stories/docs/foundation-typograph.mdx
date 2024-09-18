@@ -3,26 +3,26 @@ import { Meta, Typeset } from '@storybook/blocks';
 <Meta title="Foundation/Typograph" />
 
 export const typography = {
-    type: {
-        national2Condensed: "National2Condensed",
-        national2Medium: "National2Medium",
-        national2Regular: "National2Regular",
-    },
-    size: {
-        xs: 12,
-        sm: 14,
-        base: 16,
-        lg: 18,
-        xl: 20,
-        xl2: 24,
-        xl3: 30,
-        xl4: 36,
-        xl5: 48,
-        xl6: 60,
-        xl7: 72,
-        xl8: 96,
-        xl9: 128,
-    },
+  type: {
+    national2Condensed: "--font-n2c",
+    national2Medium: "--font-n2m",
+    national2Regular: "--font-n2r",
+  },
+  size: {
+    xs: 12,
+    sm: 14,
+    base: 16,
+    lg: 18,
+    xl: 20,
+    xl2: 24,
+    xl3: 30,
+    xl4: 36,
+    xl5: 48,
+    xl6: 60,
+    xl7: 72,
+    xl8: 96,
+    xl9: 128,
+  },
 };
 
 export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
@@ -44,7 +44,7 @@ export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing el
     Number(typography.size.xl8),
   ]}
   sampleText={SampleText}
-  fontFamily={typography.type.national2Condensed}
+  fontFamily={`var(${typography.type.national2Condensed})`}
 />
 
 **Font:** National 2 Medium
@@ -59,7 +59,7 @@ export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing el
     Number(typography.size.xl2),
   ]}
   sampleText={SampleText}
-  fontFamily={typography.type.national2Medium}
+  fontFamily={`var(${typography.type.national2Medium})`}
 />
 
 **Font:** National 2 Regular
@@ -74,5 +74,5 @@ export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing el
     Number(typography.size.xl2),
   ]}
   sampleText={SampleText}
-  fontFamily={typography.type.national2Regular}
+  fontFamily={`var(${typography.type.national2Regular})`}
 />
