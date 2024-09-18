@@ -5,6 +5,7 @@ const meta: Meta<typeof NavbarDesktop> = {
   component: NavbarDesktop,
   parameters: {
     layout: "fullscreen",
+    viewport: { defaultViewport: "lg" },
   },
 };
 

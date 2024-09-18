@@ -5,6 +5,7 @@ const meta: Meta<typeof NavbarMobile> = {
   component: NavbarMobile,
   parameters: {
     layout: "fullscreen",
+    viewport: { defaultViewport: "sm" },
   },
 };
 
