@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "@/components/global.css";
+import "@/app/components/global.css";
 import { Provider } from "./provider";
 import { NavbarMobile, NavbarDesktop } from "@/app/components/navbar";
 import { fontN2C, fontN2M, fontN2R } from "../components/font";
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontN2C.variable} ${fontN2M.variable} ${fontN2R.variable}`}
+      className={`${fontN2C.variable} ${fontN2M.variable} ${fontN2R.variable} font-n2r`}
     >
       <body>
         <Provider>

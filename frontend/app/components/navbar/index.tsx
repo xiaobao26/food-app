@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Divider,
-  Link,
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/react";
+import { Divider, Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 
 import {
   LINK_ACCOUNT,
@@ -20,7 +14,6 @@ import { usePathname } from "next/navigation";
 import { getBaseUrlPath } from "@/app/lib/utils";
 
 import IconCartDesktop from "@/public/icons/icon-cart-desktop.svg";
-import IconCartDesktopUrl from "@/public/icons/icon-cart-desktop.svg?url";
 import IconKfcLogo from "@/public/icons/icon-kfc-logo.svg";
 import IconHomeOutlined from "@/public/icons/icon-home-outlined.svg";
 import IconHomeFilled from "@/public/icons/icon-home-filled.svg";
@@ -30,6 +23,7 @@ import IconPriceTagOutlined from "@/public/icons/icon-price-tag-outlined.svg";
 import IconPriceTagFilled from "@/public/icons/icon-price-tag-filled.svg";
 import IconMenu from "@/public/icons/icon-menu.svg";
 import IconUser from "@/public/icons/icon-user.svg";
+import Link from "next/link";
 
 const NAVIGATION_MOBILE = [
   {
@@ -89,7 +83,7 @@ export function NavbarMobile() {
       >
         {NAVIGATION_MOBILE.map((item) => (
           <div key={item.title}>
-            <a href={item.link} className="flex flex-col items-center">
+            <Link href={item.link} className="flex flex-col items-center">
               {item.link === basePath ? (
                 <>
                   <item.iconFilled className={`fill-[#e4002c] ${iconSize}`} />
@@ -101,7 +95,7 @@ export function NavbarMobile() {
                   <span className="text-black">{item.title}</span>
                 </>
               )}
-            </a>
+            </Link>
           </div>
         ))}
       </nav>
@@ -135,40 +129,37 @@ export function NavbarDesktop() {
       }}
     >
       <NavbarContent className="flex gap-10">
-        <a href={LINK_HOME}>
+        <Link href={LINK_HOME}>
           <IconKfcLogo />
-        </a>
+        </Link>
         {NAVIGATION_DESKTOP.map((item) => (
           <NavbarItem
             key={item.title}
             isActive={item.link === basePath}
             className="text-sm"
           >
-            <a
+            <Link
               href={item.link}
               className={`${
                 item.link === basePath ? "text-[#e4002c]" : "text-black"
               }`}
             >
               {item.title}
-            </a>
+            </Link>
           </NavbarItem>
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <a href="#" className="flex gap-3 items-center text-sm">
+          <Link href="#" className="flex gap-3 items-center text-sm">
             <IconUser className="w-5 h-5" />
             <span>Sign In</span>
-          </a>
+          </Link>
         </NavbarItem>
         <Divider orientation="vertical" className="h-6" />
         <NavbarItem>
           <Link href={LINK_CART} className="text-black gap-2">
-            <div
-              className="w-12 h-12"
-              style={{ backgroundImage: `url(${IconCartDesktopUrl.src})` }}
-            ></div>
+            <IconCartDesktop className="w-12 h-12" />
           </Link>
         </NavbarItem>
       </NavbarContent>
