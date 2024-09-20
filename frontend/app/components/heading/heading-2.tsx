@@ -7,7 +7,7 @@ type H2Props = {
 
 export default function H2(props: H2Props) {
   return (
-    <h2 className="font-mono text-black text-xl uppercase font-bold tracking-wide text-center">
+    <h2 className="font-n2c text-black text-2xl sm:text-4xl uppercase tracking-wider">
       {props.label ? props.label : props.children}
     </h2>
   );
