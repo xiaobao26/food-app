@@ -1,6 +1,7 @@
-import { TypeSlideHero } from "@/app/components/carousel/carousel-hero";
+import { TypePromo } from "../components/card/card-promo";
+import { TypeSlideHero } from "../components/carousel/carousel-slide-hero";
 
-export const fakeSlidesHero: TypeSlideHero[] = [
+export const FAKE_SLIDES_HERO: TypeSlideHero[] = [
   {
     title: "The slab",
     smallTitle: "Limited time offer",
@@ -32,5 +33,64 @@ export const fakeSlidesHero: TypeSlideHero[] = [
     orderLink: "#",
     note: "Not available on delivery",
     imgSrcDesktop: "/images/HERO_WEB_Desktop_2880x1260_4.png",
+  },
+];
+
+export const FAKE_SLIDES_PROMO: TypePromo[] = [
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
+  },
+  {
+    title: "$6.95 double slider & chips",
+    imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
+    detail: "Double the Sliders, double the fun! Untile 4pm.",
+    detailLink: "#",
+    redeemLink: "#",
   },
 ];
