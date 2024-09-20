@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPromoNo from "./card-promo-no";
+import { CardPromoNo } from "./card-promo";
 
 const meta: Meta<typeof CardPromoNo> = {
-  title: "Components/Card/Promos No",
   component: CardPromoNo,
 };
 

@@ -1,14 +1,10 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image,
-  Link,
-} from "@nextui-org/react";
+import { Card, CardFooter, CardHeader, Link } from "@nextui-org/react";
 import ButtonCustom from "../button/button-custom";
 
-export type CardPromoProps = {
+import NextLink from "next/link";
+import Image from "next/image";
+
+export type TypePromo = {
   title: string;
   imgSrc: string;
   detail: string;
@@ -16,37 +12,96 @@ export type CardPromoProps = {
   redeemLink: string;
 };
 
-export default function CardPromo(props: CardPromoProps) {
+function CardPromoDecorator(props: any) {
+  return <div className={"w-60 h-[440px] lg:w-72 lg:h-[480px]"}>{props.children}</div>;
+}
+
+export function CardPromo({ promo }: { promo: TypePromo }) {
   return (
-    <Card className="w-60 h-[480px] bg-[#f9f6f5]">
-      <CardHeader className="flex-col p-0">
-        <Image src={props.imgSrc} alt={props.title} width="100%" />
-      </CardHeader>
-      <CardBody className="flex-col items-center justify-center gap-4">
-        <span className="font-sans uppercase text-2xl font-bold text-center">
-          {props.title}
-        </span>
-        <p className="text-sm text-center">{props.detail}</p>
-        <Link
-          href={props.detailLink}
-          underline="always"
-          className="text-sm text-center"
-        >
-          View Details
-        </Link>
-      </CardBody>
-      <CardFooter className="flex-col items-center">
-        <ButtonCustom
-          size="md"
-          radius="full"
-          fullWidth
-          as={Link}
-          href={props.redeemLink}
-          className="bg-black text-white hover:border-2 hover:border-black hover:bg-white hover:text-black"
-        >
-          Redeem
-        </ButtonCustom>
-      </CardFooter>
-    </Card>
+    <CardPromoDecorator>
+      <Card shadow="sm" className="w-full h-full bg-[#f9f6f5] flex flex-col">
+        <Image
+          src={promo.imgSrc}
+          alt={promo.title}
+          width={240}
+          height={(240 * 3) / 4}
+          className="w-full"
+        />
+        <div className="p-4 flex-grow flex flex-col items-center justify-between">
+          <div className="flex-grow flex flex-col items-center gap-4">
+            <div className="w-full h-16 flex items-center justify-center">
+              <p className="font-n2c uppercase text-2xl text-center line-clamp-2">
+                {promo.title}
+              </p>
+            </div>
+            <p className="font-n2r text-sm text-center w-full h-10 line-clamp-2">
+              {promo.detail}
+            </p>
+            <Link
+              as={NextLink}
+              href={promo.detailLink}
+              underline="always"
+              className="font-n2m text-sm text-center text-black"
+            >
+              View Details
+            </Link>
+          </div>
+          <ButtonCustom
+            size="md"
+            radius="full"
+            fullWidth
+            as={Link}
+            href={promo.redeemLink}
+            className="font-n2m text-xs bg-black text-white hover:border-2 hover:border-black hover:bg-white hover:text-black"
+          >
+            Redeem
+          </ButtonCustom>
+        </div>
+      </Card>
+    </CardPromoDecorator>
+  );
+}
+
+export function CardPromoNo() {
+  return (
+    <CardPromoDecorator>
+      <Card className="w-full h-full bg-[#f9f6f5] justify-center">
+        <CardHeader className="flex-col gap-6">
+          <p className="font-n2c text-black text-3xl text-center uppercase">
+            No promos right now 🤔
+          </p>
+          <p className="font-n2r text-black text-xs text-center">
+            Tips: Check back during your chosen restaurant's opening hours
+            <span className="not-italic"> 😋</span>
+          </p>
+        </CardHeader>
+      </Card>
+    </CardPromoDecorator>
+  );
+}
+
+export function CardPromoLogin() {
+  return (
+    <CardPromoDecorator>
+      <Card className="w-full h-full bg-[#f9f6f5] flex-col items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('/images/PROMO_LOGIN.png')]">
+        <CardHeader className="font-n2c text-3xl text-white tracking-wider uppercase flex-col gap-3">
+          <p>Sign in to see</p>
+          <p>Extra rewards,</p>
+          <p>Just for you</p>
+        </CardHeader>
+        <CardFooter>
+          <ButtonCustom
+            size="md"
+            radius="full"
+            fullWidth
+            as={Link}
+            href="#"
+            className="font-n2m bg-[#E4002B] border-2 text-white border-white hover:bg-white hover:text-[#E4002B]"
+          >
+            Sign In
+          </ButtonCustom>
+        </CardFooter>
+      </Card>
+    </CardPromoDecorator>
   );
 }

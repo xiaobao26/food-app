@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPromo, { CardPromoProps } from "./card-promo";
+import { CardPromo, TypePromo } from "./card-promo";
 
 const meta: Meta<typeof CardPromo> = {
-  title: "Components/Card/Promos And Rewards",
   component: CardPromo,
 };
 
@@ -10,16 +9,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const promo: CardPromoProps = {
-  title: "$6.95 double slider & chips",
-  imgSrc: "/images/PROMO_DOUBLE_SLIDER_CHIPS.png",
-  detail: "Double the Sliders, double the fun! Untile 4pm.",
+const promo: TypePromo = {
+  title: "Cheap as chips Cheap as chips Cheap as chips",
+  imgSrc: "/images/PROMO_CHEAP_AS_CHIPS.png",
+  detail:
+    "That's 8 delicious pieces of Original Recipe with a bunch of classics.",
   detailLink: "#",
   redeemLink: "#",
 };
 
 export const Default: Story = {
   args: {
-    ...promo,
+    promo,
   },
 };
