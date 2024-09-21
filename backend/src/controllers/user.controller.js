@@ -1,5 +1,6 @@
 const createLogger  = require('../utils/logger');
 const UserModel = require('../models/user.model');
+const Joi = require('joi');
 
 
 const logger = createLogger(__dirname);
@@ -180,9 +181,32 @@ const getUserById = async (req, res, next) => {
  */
 const addUser = async (req, res, next) => {
     try {
-        const { userName, email, password, phoneNumber } = req.body;
+        const schema = Joi.object({
+            userName: Joi.string().alphanum().min(3).max(30).required().messages({
+                'string.alphanum': 'Username must only contain alphanumeric characters.',
+                'string.min': 'Username must be at least 3 characters long.',
+                'string.max': 'Username must be no more than 30 characters long.',
+                'any.required': 'Username is required.'
+            }),
+            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().messages({
+                'string.email': 'Enail must be a valid email address',
+                'any.required': 'Email is required.'
+            }),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required().messages({
+                'string.pattern.base': 'Password must be between 8 and 30 characters and contain only letters and numbers.',
+                'any.required': 'Password is required.'
+            }),
+            phoneNumber: Joi.string().pattern(/^[0-9]{10}$/).required().messages({
+                'string.pattern.base': 'Phone number must be a 10-digit number.',
+                'any.required': 'Phone number is required.'
+            })
+        })
+        const validatedBody = await schema.validateAsync(req.body, {
+            allowUnknown: true,
+            stripUnknown: true,
+        });
 
-        const user = new UserModel({userName, email, password, phoneNumber});
+        const user = new UserModel(validatedBody);
         await user.save();
     
         // status code: 201 -> create successful
