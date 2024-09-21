@@ -10,10 +10,12 @@ import NextLink from "next/link";
 export default async function Page() {
   return (
     <>
-      <CarouselHero slides={FAKE_SLIDES_HERO} />
-      <div className="flex flex-col items-center">
-        <div className="max-w-screen-lg w-full p-6">
-          <div className="mb-6 flex flex-col items-center gap-2 md:flex-row md:justify-between md:my-6">
+      <section>
+        <CarouselHero slides={FAKE_SLIDES_HERO} />
+      </section>
+      <section className="flex justify-center my-6">
+        <div className="max-w-screen-lg w-full px-6 flex flex-col gap-6">  
+          <div className="flex flex-col items-center gap-2 md:flex-row md:justify-between">
             <H2>Promos & Rewards</H2>
             <Link
               as={NextLink}
@@ -27,7 +29,7 @@ export default async function Page() {
           </div>
           <CarouselPromo slides={FAKE_SLIDES_PROMO} />
         </div>
-      </div>
+      </section>
     </>
   );
 }

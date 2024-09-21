@@ -1,5 +1,5 @@
 import { Card, CardFooter, CardHeader, Link } from "@nextui-org/react";
-import ButtonCustom from "../button/button-custom";
+import ButtonMedium from "../button/button-medium";
 
 import NextLink from "next/link";
 import Image from "next/image";
@@ -13,7 +13,11 @@ export type TypePromo = {
 };
 
 function CardPromoDecorator(props: any) {
-  return <div className={"w-60 h-[440px] lg:w-72 lg:h-[480px]"}>{props.children}</div>;
+  return (
+    <div className={"w-60 h-[440px] lg:w-72 lg:h-[480px]"}>
+      {props.children}
+    </div>
+  );
 }
 
 export function CardPromo({ promo }: { promo: TypePromo }) {
@@ -27,7 +31,7 @@ export function CardPromo({ promo }: { promo: TypePromo }) {
           height={(240 * 3) / 4}
           className="w-full"
         />
-        <div className="p-4 flex-grow flex flex-col items-center justify-between">
+        <div className="p-6 flex-grow flex flex-col items-center justify-between">
           <div className="flex-grow flex flex-col items-center gap-4">
             <div className="w-full h-16 flex items-center justify-center">
               <p className="font-n2c uppercase text-2xl text-center line-clamp-2">
@@ -46,16 +50,15 @@ export function CardPromo({ promo }: { promo: TypePromo }) {
               View Details
             </Link>
           </div>
-          <ButtonCustom
+          <ButtonMedium
             size="md"
-            radius="full"
             fullWidth
             as={Link}
             href={promo.redeemLink}
-            className="font-n2m text-xs bg-black text-white hover:border-2 hover:border-black hover:bg-white hover:text-black"
+            className="font-n2m bg-black text-white hover:border-2 hover:border-black hover:bg-white hover:text-black"
           >
             Redeem
-          </ButtonCustom>
+          </ButtonMedium>
         </div>
       </Card>
     </CardPromoDecorator>
@@ -65,7 +68,7 @@ export function CardPromo({ promo }: { promo: TypePromo }) {
 export function CardPromoNo() {
   return (
     <CardPromoDecorator>
-      <Card className="w-full h-full bg-[#f9f6f5] justify-center">
+      <Card shadow="sm" className="w-full h-full bg-[#f9f6f5] justify-center">
         <CardHeader className="flex-col gap-6">
           <p className="font-n2c text-black text-3xl text-center uppercase">
             No promos right now 🤔
@@ -83,14 +86,14 @@ export function CardPromoNo() {
 export function CardPromoLogin() {
   return (
     <CardPromoDecorator>
-      <Card className="w-full h-full bg-[#f9f6f5] flex-col items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('/images/PROMO_LOGIN.png')]">
+      <Card shadow="sm" className="w-full h-full bg-[#f9f6f5] flex-col items-center justify-center bg-cover bg-no-repeat bg-center bg-[url('/images/PROMO_LOGIN.png')]">
         <CardHeader className="font-n2c text-3xl text-white tracking-wider uppercase flex-col gap-3">
           <p>Sign in to see</p>
           <p>Extra rewards,</p>
           <p>Just for you</p>
         </CardHeader>
         <CardFooter>
-          <ButtonCustom
+          <ButtonMedium
             size="md"
             radius="full"
             fullWidth
@@ -99,7 +102,7 @@ export function CardPromoLogin() {
             className="font-n2m bg-[#E4002B] border-2 text-white border-white hover:bg-white hover:text-[#E4002B]"
           >
             Sign In
-          </ButtonCustom>
+          </ButtonMedium>
         </CardFooter>
       </Card>
     </CardPromoDecorator>

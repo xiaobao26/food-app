@@ -77,12 +77,12 @@ export function NavbarMobile() {
   const iconSize = "w-4 h-4";
 
   return (
-    <div className={`w-full ${navHeight} lg:hidden static bottom-0`}>
-      <nav
+    <nav className={`w-full ${navHeight} lg:hidden static bottom-0`}>
+      <ul
         className={`font-n2m text-[10px] leading-4 w-full ${navHeight} bg-white rounded-t-lg shadow-[rgba(99,99,99,0.2)_0px_-2px_8px_0px] fixed bottom-0 flex items-center justify-around`}
       >
         {NAVIGATION_MOBILE.map((item) => (
-          <div key={item.title}>
+          <li key={item.title}>
             <Link href={item.link} className="flex flex-col items-center">
               {item.link === basePath ? (
                 <>
@@ -96,10 +96,10 @@ export function NavbarMobile() {
                 </>
               )}
             </Link>
-          </div>
+          </li>
         ))}
-      </nav>
-    </div>
+      </ul>
+    </nav>
   );
 }
 
@@ -109,8 +109,9 @@ export function NavbarDesktop() {
 
   return (
     <Navbar
-      className="font-n2m hidden lg:flex lg:h-24"
+      className="font-n2m hidden bg-white lg:flex lg:h-24"
       isBordered
+      isBlurred={false}
       classNames={{
         item: [
           "flex",
@@ -129,9 +130,11 @@ export function NavbarDesktop() {
       }}
     >
       <NavbarContent className="flex gap-10">
-        <Link href={LINK_HOME}>
-          <IconKfcLogo />
-        </Link>
+        <NavbarItem>
+          <Link href={LINK_HOME}>
+            <IconKfcLogo />
+          </Link>
+        </NavbarItem>
         {NAVIGATION_DESKTOP.map((item) => (
           <NavbarItem
             key={item.title}

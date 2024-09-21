@@ -1,6 +1,11 @@
 "use client";
 
-import { CardPromo, TypePromo } from "../card/card-promo";
+import {
+  CardPromo,
+  CardPromoLogin,
+  CardPromoNo,
+  TypePromo,
+} from "../card/card-promo";
 import useEmblaCarousel from "embla-carousel-react";
 import ClassNames from "embla-carousel-class-names";
 
@@ -11,8 +16,8 @@ export default function CarouselPromo({
 }) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
-      align: "start",
       breakpoints: { "(max-width: 639px)": { dragFree: true } },
+      align: "start",
     },
     [ClassNames()]
   );
@@ -20,9 +25,15 @@ export default function CarouselPromo({
   return (
     <div className="embla">
       <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-        <div className="embla__container flex my-1 -ml-5">
+        <div className="embla__container flex">
+          <div className="embla__slide embla__class-names flex-none py-1 px-2">
+            <CardPromoNo />
+          </div>
+          <div className="embla__slide embla__class-names flex-none py-1 px-2">
+            <CardPromoLogin />
+          </div>
           {promos.map((promo, index) => (
-            <div className="embla__slide embla__class-names flex-none pl-6">
+            <div className="embla__slide embla__class-names flex-none py-1 px-2">
               <CardPromo key={index} promo={promo} />
             </div>
           ))}
