@@ -1,5 +1,20 @@
+const createLogger  = require('../utils/logger');
 const UserModel = require('../models/user.model');
 
+
+const logger = createLogger(__dirname);
+// curring function
+// higher order function  (routeHandler -> is a function)
+// const catchAll = (routeHandler) => {
+//     return async (req, res, next) => {
+//         try {
+//             await routeHandler(req, res, next);
+//         } catch(e) {
+//             logger.info(e.message);
+//             next(e);
+//         }
+//     }
+// }
 /***
  * @swagger
  * components:
@@ -72,20 +87,26 @@ const UserModel = require('../models/user.model');
  *         description: Internal server error
  */
 const getAllUsers = async (req, res, next) => {
-    // pagination
-    const pageSize = parseInt(req.query.pageSize) || 2; // 每页的记录数
-    // last require recorded id
-    const cursor = req.query.cursor;
+    try {
+        // pagination
+        const pageSize = parseInt(req.query.pageSize) || 2; // 每页的记录数
+        // last require recorded id
+        const cursor = req.query.cursor;
 
-    let query = {};
-    if (cursor) {
-        query._id = { $gt: cursor };
+        let query = {};
+        if (cursor) {
+            query._id = { $gt: cursor };
+        }
+        const users = await UserModel.find(query).limit(pageSize).exec();
+        
+        const nextCursor = users.length === pageSize ? users[users.length - 1]._id : null;
+        // status code: 200 -> ok
+        res.formatResponse(users, 200, { nextCursor });
+    } catch (e) {
+        logger.info(e.message);
+        next(e);
     }
-    const users = await UserModel.find(query).limit(pageSize).exec();
-    
-    const nextCursor = users.length === pageSize ? users[users.length - 1]._id : null;
-    // status code: 200 -> ok
-    res.formatResponse(users, 200, { nextCursor });
+
 };
 
 
@@ -115,15 +136,21 @@ const getAllUsers = async (req, res, next) => {
  *         description: Internal server error
  */
 const getUserById = async (req, res, next) => {
-    const id = req.params.id;
-    const user = await UserModel.findById(id).exec();
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findById(id).exec();
 
-    if (!user) {
-        res.formatResponse(`Cannot find user ${id}!`, 404);
-        return;
+        if (!user) {
+            res.formatResponse(`Cannot find user ${id}!`, 404);
+            return;
+        }
+        // status code: 200 -> ok
+        res.formatResponse(user);
+    } catch (e) {
+        logger.info(e.message);
+        next(e);
     }
-    // status code: 200 -> ok
-    res.formatResponse(user);
+    
 };
 
 
@@ -152,13 +179,18 @@ const getUserById = async (req, res, next) => {
  *         description: Internal server error
  */
 const addUser = async (req, res, next) => {
-    const { userName, email, password, phoneNumber } = req.body;
+    try {
+        const { userName, email, password, phoneNumber } = req.body;
 
-    const user = new UserModel({userName, email, password, phoneNumber});
-    await user.save();
-
-    // status code: 201 -> create successful
-    res.formatResponse(user, 201);
+        const user = new UserModel({userName, email, password, phoneNumber});
+        await user.save();
+    
+        // status code: 201 -> create successful
+        res.formatResponse(user, 201);
+    } catch (e) {
+        logger.info(e.message);
+        next(e);
+    }
 };
 
 
@@ -186,15 +218,21 @@ const addUser = async (req, res, next) => {
  */
 
 const deleteUserById = async (req, res, next) => {
-    const id = req.params.id;
-    const user = await UserModel.findByIdAndDelete(id).exec();
-
-    if (!user) {
-        res.formatResponse(`Cannot find user ${id}!`, 404);
-        return;
+    try {
+        const id = req.params.id;
+        const user = await UserModel.findByIdAndDelete(id).exec();
+    
+        if (!user) {
+            res.formatResponse(`Cannot find user ${id}!`, 404);
+            return;
+        }
+        // status code: 204 -> content is empty;
+        res.formatResponse('', 204);
+    } catch (e) {
+        logger.info(e.message);
+        next(e);
     }
-    // status code: 204 -> content is empty;
-    res.formatResponse('', 204);
+
 
 };
 
@@ -229,17 +267,22 @@ const deleteUserById = async (req, res, next) => {
  *         description: User not found
  */
 const updateUserById = async (req, res, next) => {
-    const id = req.params.id;
-    const { userName, email, password, phoneNumber } = req.body;
-
-    // if NOT add { new: true }, the response send original value not the update value, second time response is the update value 
-    const user = await UserModel.findByIdAndUpdate(id, { userName, email, password, phoneNumber }, { new: true });
-
-    if (!user) {
-        res.formatResponse(`Cannot find user ${id}!`, 404);
+    try {
+        const id = req.params.id;
+        const { userName, email, password, phoneNumber } = req.body;
+    
+        // if NOT add { new: true }, the response send original value not the update value, second time response is the update value 
+        const user = await UserModel.findByIdAndUpdate(id, { userName, email, password, phoneNumber }, { new: true });
+    
+        if (!user) {
+            res.formatResponse(`Cannot find user ${id}!`, 404);
+        }
+        // status code: 200 -> ok
+        res.formatResponse(user);
+    } catch (e) {
+        logger.info(e.message);
+        next(e);
     }
-    // status code: 200 -> ok
-    res.formatResponse(user);
 };
 
 

@@ -11,3 +11,7 @@ react  node.js express
 
 ### user path
 > http://localhost:8080/api-docs/
+
+
+### backend validation library: Joi 
+> https://www.npmjs.com/package/joi
