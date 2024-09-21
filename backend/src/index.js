@@ -15,6 +15,7 @@ const connectToDB = require('./utils/db');
 const v1Router = require('./routes');
 const swaggerJSDoc = require('./utils/swagger');
 const pathNotFoundMiddleware = require('./middlewares/pathNotFound.middleware');
+const validationErrorMiddleware = require('./middlewares/error/validationError.middleware');
 
 
 app.use(helmet());
@@ -29,7 +30,9 @@ app.use('/v1', v1Router);
 
 // pathNotFoundMiddleware need be at front of any error
 app.use(pathNotFoundMiddleware);
+app.use(validationErrorMiddleware);
 app.use(unknownErrorMiddlewares);
+
 
 connectToDB().then(() => {
     app.listen(config.PORT, ()=> {
