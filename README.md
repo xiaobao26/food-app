@@ -44,6 +44,8 @@ get:
 > 7. Navigation
 <Link href='/api/auth/signin'>Login</Link>
 '/api/auth/signin' is 'next-auth' api
+<Link href='/api/auth/signout'>Signout</Link>
+'/api/auth/signout' is 'next-auth' api
 
 > 8.1 accessing sessions on the client (navigation bar -> client part)
 add SessionProvider in Root Layout

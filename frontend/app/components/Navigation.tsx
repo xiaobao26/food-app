@@ -14,7 +14,12 @@ const Navigation = () => {
                 <Link href='/dashboard'>Dashboard</Link>
                 {status ==='loading' && <div>Loading...</div>}
                 {status === 'unauthenticated' && <Link href='/api/auth/signin'>Login</Link>}
-                {status === 'authenticated' && <div>{session.user!.name}</div>}
+                {status === 'authenticated' && 
+                    <div className='flex gap-4'>
+                        {session.user!.name}
+                        <Link href='/api/auth/signout' >Sign Out</Link>
+                    </div>
+                }
                 <Link href='/register'>Register</Link>
             </div>
         </nav>
