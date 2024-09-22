@@ -27,8 +27,11 @@ export default function CarouselHero({ slides }: { slides: TypeSlideHero[] }) {
       <div className="embla__viewport overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex">
           {slides.map((slide) => (
-            <div className="embla__slide embla__class-names flex-[0_0_100%] transition-opacity duration-200 ease-in-out [&:not(.is-snapped)]:opacity-50">
-              <CarouselSlideHero key={slide.title} slide={slide} />
+            <div
+              key={slide.title}
+              className="embla__slide embla__class-names flex-[0_0_100%] transition-opacity duration-200 ease-in-out [&:not(.is-snapped)]:opacity-50"
+            >
+              <CarouselSlideHero slide={slide} />
             </div>
           ))}
         </div>

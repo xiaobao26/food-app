@@ -33,8 +33,11 @@ export default function CarouselPromo({
             <CardPromoLogin />
           </div>
           {promos.map((promo, index) => (
-            <div className="embla__slide embla__class-names flex-none py-1 px-2">
-              <CardPromo key={index} promo={promo} />
+            <div
+              key={index}
+              className="embla__slide embla__class-names flex-none py-1 px-2"
+            >
+              <CardPromo promo={promo} />
             </div>
           ))}
         </div>
