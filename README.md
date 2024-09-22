@@ -16,5 +16,5 @@ react  node.js express
 ### backend validation library: Joi 
 > https://www.npmjs.com/package/joi
 
-
-
+### manage database
+> mongoose
