@@ -1,6 +1,6 @@
 import { describe, afterEach, it, vi, expect } from "vitest";
 
-import apiTest from "@/apis/api-test"; // Adjust the path accordingly
+import apiTest from "@/app/apis/api-test"; // Adjust the path accordingly
 
 describe("apiTest", () => {
     afterEach(() => {

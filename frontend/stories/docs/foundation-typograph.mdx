@@ -1,0 +1,78 @@
+import { Meta, Typeset } from '@storybook/blocks';
+
+<Meta title="Foundation/Typograph" />
+
+export const typography = {
+  type: {
+    national2Condensed: "--font-n2c",
+    national2Medium: "--font-n2m",
+    national2Regular: "--font-n2r",
+  },
+  size: {
+    xs: 12,
+    sm: 14,
+    base: 16,
+    lg: 18,
+    xl: 20,
+    xl2: 24,
+    xl3: 30,
+    xl4: 36,
+    xl5: 48,
+    xl6: 60,
+    xl7: 72,
+    xl8: 96,
+    xl9: 128,
+  },
+};
+
+export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+ 
+
+# Typograph
+
+## Font Family
+
+**Font:** National 2 Condensed
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.xl),
+    Number(typography.size.xl2),
+    Number(typography.size.xl4),
+    Number(typography.size.xl5),
+    Number(typography.size.xl7),
+    Number(typography.size.xl8),
+  ]}
+  sampleText={SampleText}
+  fontFamily={`var(${typography.type.national2Condensed})`}
+/>
+
+**Font:** National 2 Medium
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.xs),
+    Number(typography.size.sm),
+    Number(typography.size.base),
+    Number(typography.size.lg),
+    Number(typography.size.xl),
+    Number(typography.size.xl2),
+  ]}
+  sampleText={SampleText}
+  fontFamily={`var(${typography.type.national2Medium})`}
+/>
+
+**Font:** National 2 Regular
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.xs),
+    Number(typography.size.sm),
+    Number(typography.size.base),
+    Number(typography.size.lg),
+    Number(typography.size.xl),
+    Number(typography.size.xl2),
+  ]}
+  sampleText={SampleText}
+  fontFamily={`var(${typography.type.national2Regular})`}
+/>
