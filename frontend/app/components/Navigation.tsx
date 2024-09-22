@@ -1,15 +1,21 @@
+'use client';
 import React from 'react'
 import Link from 'next/link'
-
+import { useSession } from 'next-auth/react'
 
 const Navigation = () => {
+    const { status, data: session } = useSession();
+
+
     return (
         <nav>
             <div className='flex gap-4 list-none bg-slate-300 p-5'>
                 <Link href='/'>Home</Link>
-                <Link href='/api/auth/signin'>Login</Link>
-                <Link href='/register'>Register</Link>
                 <Link href='/dashboard'>Dashboard</Link>
+                {status ==='loading' && <div>Loading...</div>}
+                {status === 'unauthenticated' && <Link href='/api/auth/signin'>Login</Link>}
+                {status === 'authenticated' && <div>{session.user!.name}</div>}
+                <Link href='/register'>Register</Link>
             </div>
         </nav>
     )

@@ -41,5 +41,22 @@ get:
 
 > 6. Create Google Provider in route.ts ([text](https://next-auth.js.org/providers/google))
 
-> 7. 
+> 7. Navigation
+<Link href='/api/auth/signin'>Login</Link>
+'/api/auth/signin' is 'next-auth' api
+
+> 8.1 accessing sessions on the client (navigation bar -> client part)
+add SessionProvider in Root Layout
+useSession to get user data(information)
+
+> 8.2 accessing sessions on the server
+getServer in (home page -> server side)
+
+
+
+
+
+
+
+
 
