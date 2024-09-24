@@ -1,26 +1,35 @@
 const { Schema, model } = require('mongoose');
-const Joi = require('joi');
-
 
 const userSchema = new Schema({
-    userName: {
+    name: {
         type: String,
         required: true,
     },
     email: {
         type: String,
         required: true,
+        unique: true, // Ensuring the email is unique
     },
-    password: {
-        type: String,
-        required: true,
+    emailVerified: {
+        type: Date,  // If using email verification
+        default: null,
+    },
+    image: {
+        type: String,  // Profile picture URL from Google
+        default: null,
     },
     phoneNumber: {
-        type: String,
-        required: true,
+        type: String,  // Custom field you want to add
+        default: null,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
     }
 });
 
-// show 'users' in mongodb database
-// User -> users
-module.exports = model('User', userSchema)
+module.exports = model('User', userSchema);
