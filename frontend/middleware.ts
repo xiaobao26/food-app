@@ -7,3 +7,10 @@ export const config = {
     //  ?: zero or one
     matcher: ['/dashboard/:path*']
 }
+
+// middleware in next-auth logic:
+/**
+ * export function middleware(request: NextRequest) {
+ *  return NextResponse.redirect(new URL('/new-page', request.url))
+ * }
+ */
