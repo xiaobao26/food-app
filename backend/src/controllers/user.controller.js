@@ -23,7 +23,7 @@ const logger = createLogger(__dirname);
  *      User:
  *          type: Object
  *          required: 
- *              -userName
+ *              -name
  *              -email
  *              -password
  *              -phoneNumber
@@ -31,7 +31,7 @@ const logger = createLogger(__dirname);
  *              id:
  *                  type: number
  *                  description: auto generated unique identifier
- *              userName:
+ *              name:
  *                  type: string
  *              email: 
  *                  type: string
@@ -41,7 +41,7 @@ const logger = createLogger(__dirname);
  *                  type: string
  *          example:
  *              id: "66dff80c86418887206d615b"
- *              userName: "Xiaobao"
+ *              name: "Xiaobao"
  *              email: "xiaobao.xue@outlook.com"
  *              password: "123456"
  *              phoneNumber: "0493497606"
@@ -182,11 +182,11 @@ const getUserById = async (req, res, next) => {
 const addUser = async (req, res, next) => {
     try {
         const schema = Joi.object({
-            userName: Joi.string().alphanum().min(3).max(30).required().messages({
-                'string.alphanum': 'Username must only contain alphanumeric characters.',
-                'string.min': 'Username must be at least 3 characters long.',
-                'string.max': 'Username must be no more than 30 characters long.',
-                'any.required': 'Username is required.'
+            name: Joi.string().alphanum().min(3).max(30).required().messages({
+                'string.alphanum': 'name must only contain alphanumeric characters.',
+                'string.min': 'name must be at least 3 characters long.',
+                'string.max': 'name must be no more than 30 characters long.',
+                'any.required': 'name is required.'
             }),
             email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().messages({
                 'string.email': 'Enail must be a valid email address',
@@ -293,10 +293,10 @@ const deleteUserById = async (req, res, next) => {
 const updateUserById = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const { userName, email, password, phoneNumber } = req.body;
+        const { name, email, password, phoneNumber } = req.body;
     
         // if NOT add { new: true }, the response send original value not the update value, second time response is the update value 
-        const user = await UserModel.findByIdAndUpdate(id, { userName, email, password, phoneNumber }, { new: true });
+        const user = await UserModel.findByIdAndUpdate(id, { name, email, password, phoneNumber }, { new: true });
     
         if (!user) {
             res.formatResponse(`Cannot find user ${id}!`, 404);
