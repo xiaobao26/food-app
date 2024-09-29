@@ -1,37 +1,57 @@
 import { Schema, model } from 'mongoose';
 
-const AccountSchema = new Schema({
+const accountSchema = new Schema({
     provider: {
-        type: String, required: true 
+        type: String,
+        required: true,
     },
-    type: { 
-        type: String, required: true 
+    type: {
+        type:String,
+        required: true,
     },
-    providerAccountId: { 
-        type: String, required: true 
+    providerAccountId: {
+        type: String,
+        required: true,
+        // @map("provider_account_id")
     },
-    access_token: { 
-        type: String 
+    refresh_token: {
+        type: String,
+        // @db.Text
     },
-    expires_at: { 
-        type: Number 
+    access_token: {
+        type: String,
+        //@db.Text
     },
-    scope: { 
-        type: String 
+    expires_at: {
+        type: Number,
     },
-    token_type: { 
-        type: String 
+    token_type: {
+        type: String,
     },
-    id_token: { 
-        type: String 
+    scope: {
+        type: String,
     },
-    userId: { 
-        type: Schema.Types.ObjectId, 
+    id_token: {
+        type: String,
+        // @db.Text
+    },
+    session_state: {
+        type: String,
+    },
+    userId: {
+        type:Schema.Types.ObjectId,
+        //  @map("user_id")
         ref: 'User',
-        required: true 
-    },
+        required: true,
+    }
+}, {
+    // Prisma @@map("accounts")
+    collection: 'accounts',
+    // Adds createdAt and updatedAt timestamps
+    timestamps: true,  
 });
 
-const Account = model('Account', AccountSchema);
+//     @@unique([provider, providerAccountId])
+accountSchema.index({ provider: 1, providerAccountId: 1 }, { unique: true })
 
-export default Account;
+module.exports = model('Account', accountSchema)

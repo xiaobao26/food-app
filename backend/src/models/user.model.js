@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
     name: {
@@ -7,7 +8,9 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function() {
+            return this.provider === 'email';
+        },
     },
     email: {
         type: String,
@@ -17,6 +20,11 @@ const userSchema = new Schema({
     emailVerified: {
         type: Date,  // If using email verification
         default: null,
+    },
+    provider: {
+        type: String,
+        required: true,
+        unique: ['google', 'email'],
     },
     image: {
         type: String,  // Profile picture URL from Google
@@ -34,6 +42,17 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     }
+}, {
+    collection: 'users',
+    timestamps: true,
+});
+
+// Pre-save middleware to hash password
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
 });
 
 module.exports = model('User', userSchema);

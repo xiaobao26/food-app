@@ -9,43 +9,38 @@ const logger = createLogger(__dirname);
 
 const login = async (req, res, next) => {
     try {
+        // defined and check input validation
         const loginSchema = Joi.object({
             email: Joi.string().email().required(),
             password: Joi.string().required(),
         });
-
         const { email, password } = await loginSchema.validateAsync(req.body);
-        console.log(password);
 
+        // then find user by email in database
         const user = await User.findOne({ email });
-        // if not this email in database
         if (!user) {
-            return res.formatResponse(`Cannot find user ${email}!`, 404);
+            return res.formatResponse(`Cannot found user ${email}`, 404);
         }
-        console.log(user.password)
 
-        // if the email validate
-        // check the password
+        // if the email in database, then check password
         const isPasswordValid = await bcrypt.compare(password, user.password);
-
         if (!isPasswordValid) {
-            return res.formatResponse(`Password incorrect, invalid credentials!`, 404);
+            return res.formatResponse('Password incorrect, invalid credentials!', 401);
         }
+        // if password match, create token
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         });
-        res.json({ token, user: { id: user._id, email: user.email, name: user.name } });
-
-    } catch (e) {
-        logger.info(e.message);
-        next(e);
+        res.json({ token, user: { id: user._id, email: user.email, name: user.name }});
+    } catch (error) {
+        logger.info(error.message);
+        next(error);
     }
 }
 
 const register = async (req, res, next) => {
+    // define register validation schema
     try {
-        const saltRounds = 10;
-        // Validate request body
         const registerSchema = Joi.object({
             name: Joi.string().alphanum().min(3).max(30).required().messages({
                 'string.alphanum': 'name must only contain alphanumeric characters.',
@@ -53,32 +48,41 @@ const register = async (req, res, next) => {
                 'string.max': 'name must be no more than 30 characters long.',
                 'any.required': 'name is required.'
             }),
-            email: Joi.string().email().required(),
-            password: Joi.string().required(),
+            email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().messages({
+                'string.email': 'Enail must be a valid email address',
+                'any.required': 'Email is required.'
+            }),
+            password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required().messages({
+                'string.pattern.base': 'Password must be between 8 and 30 characters and contain only letters and numbers.',
+                'any.required': 'Password is required.'
+            }),
+            phoneNumber: Joi.string().pattern(/^[0-9]{10}$/).required().messages({
+                'string.pattern.base': 'Phone number must be a 10-digit number.',
+                'any.required': 'Phone number is required.'
+            })
+        })
+        // check input whether valid
+        const { name, email, password, phoneNumber} = await registerSchema.validateAsync(req.body, {
+            allowUnknown: true,
+            stripUnknown: true,
         });
-        const { name, email, password } = await registerSchema.validateAsync(req.body);
-
-        // Check if user already exists
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ error: 'User already exists' });
+    
+        // check if user exist in database
+        // if exist return 400
+        // else register successful
+        const existUser = await User.findOne({ email });
+        if (existUser) {
+            return res.formatResponse(`User ${email} already exist!`, 400);
         }
-
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-        // Create a new user
         const newUser = new User({
             name,
             email,
-            password: hashedPassword // Store the hashed password
+            password,
+            phoneNumber,
+            provider: 'email',
         });
-
-        // Save the user to the database
         await newUser.save();
-
-        // Respond with success
-        res.status(201).json({ message: 'User registered successfully' });
+        res.formatResponse(`user ${email} registered successful!`, 201);
     } catch (error) {
         logger.info(error.message);
         next(error);
