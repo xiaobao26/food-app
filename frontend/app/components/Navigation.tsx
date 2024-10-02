@@ -13,11 +13,11 @@ const Navigation = () => {
                 <Link href='/'>Home</Link>
                 <Link href='/dashboard'>Dashboard</Link>
                 {status ==='loading' && <div>Loading...</div>}
-                {status === 'unauthenticated' && <Link href='/api/auth/signin'>Login</Link>}
+                {status === 'unauthenticated' && <Link href='/signin'>Login</Link>}
                 {status === 'authenticated' && 
                     <div className='flex gap-4'>
                         {session.user!.name}
-                        <Link href='/api/auth/signout' >Sign Out</Link>
+                        <Link href='/signout' >Sign Out</Link>
                     </div>
                 }
                 <Link href='/register'>Register</Link>

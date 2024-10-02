@@ -65,6 +65,12 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
     ],
+
+    // custom sign in/sign out page
+    pages: {
+        signIn: '/signin',
+        signOut: '/signout',
+    },
     session: {
         strategy: 'jwt',
     },

@@ -60,6 +60,9 @@ getServer in (home page -> server side)
 [MongoDb adapter in next-auth](https://authjs.dev/getting-started/adapters/mongodb?_gl=1*cnjc4q*_gcl_au*ODU1OTE4NDA2LjE3MjY2MjM4NTY.)
 
 
+> configuration login page (by default next-auth support login page if using google provider)
+https://next-auth.js.org/configuration/pages
+
 
 
 
